@@ -43,6 +43,9 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #endif
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 vtkCxxRevisionMacro(vtkGDCMThreadedImageReader, "$Revision: 1.1 $")
 vtkStandardNewMacro(vtkGDCMThreadedImageReader)
