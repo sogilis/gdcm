@@ -11,7 +11,7 @@
 #include <config.h>
 #include <protocol.h>
 
-#ifdef WIN32
+#ifdef _WIN32
 #ifndef EPROTONOSUPPORT
 #	define EPROTONOSUPPORT				WSAEPROTONOSUPPORT
 #endif

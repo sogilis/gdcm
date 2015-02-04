@@ -47,7 +47,7 @@ bool sig::set (int signo, sig::hnd* hnd)
   phndlist& v = smap [signo];
 
   if (v.empty ()) {
-#ifndef WIN32
+#ifndef _WIN32
     struct sigaction sa;
     if (sigaction (signo, 0, &sa) == -1) throw sigerr();
     if (sa.sa_handler != sighnd_type (&sighandler)) {
@@ -91,7 +91,7 @@ void sig::unset (int signo)
 {
   phndlist& v = smap [signo];
   v.erase (v.begin (), v.end ());
-#ifndef WIN32
+#ifndef _WIN32
   struct sigaction sa;
   if (sigaction (signo, 0, &sa) == -1) throw sigerr();
   if (sa.sa_handler == sighnd_type (&sighandler)) {
@@ -105,7 +105,7 @@ void sig::unset (int signo)
 
 void sig::mask (int signo) const
 {
-#ifndef WIN32
+#ifndef _WIN32
   sigset_t s;
   if (sigemptyset (&s) == -1) throw sigerr();
   if (sigaddset (&s, signo) == -1) throw sigerr();
@@ -116,7 +116,7 @@ void sig::mask (int signo) const
 
 void sig::unmask (int signo) const
 {
-#ifndef WIN32
+#ifndef _WIN32
   sigset_t s;
   if (sigemptyset (&s) == -1) throw sigerr();
   if (sigaddset (&s, signo) == -1) throw sigerr();
@@ -127,7 +127,7 @@ void sig::unmask (int signo) const
 
 void sig::mask (int siga, int sigb) const
 {
-#ifndef WIN32
+#ifndef _WIN32
   struct sigaction sa;
   if (sigaction (siga, 0, &sa) == -1) throw sigerr();
   if (sa.sa_handler != sighnd_type (&sighandler)) {
@@ -142,7 +142,7 @@ void sig::mask (int siga, int sigb) const
 
 void sig::unmask (int siga, int sigb) const
 {
-#ifndef WIN32
+#ifndef _WIN32
   struct sigaction sa;
   if (sigaction (siga, 0, &sa) == -1) throw sigerr();
   if (sa.sa_handler != sighnd_type (&sighandler)) {
@@ -158,7 +158,7 @@ void sig::unmask (int siga, int sigb) const
 
 void sig::sysresume (int signo, bool set) const
 {
-#ifndef WIN32
+#ifndef _WIN32
   struct sigaction sa;
   if (sigaction (signo, 0, &sa) == -1) throw sigerr();
   if (sa.sa_handler != sighnd_type (&sighandler)) {
@@ -196,7 +196,7 @@ void sig::kill (int signo)
 
 sigset_t sig::pending () const
 {
-#ifndef WIN32
+#ifndef _WIN32
   sigset_t s;
   if (sigemptyset (&s) == -1) throw sigerr();
   if (sigpending (&s) == -1) throw sigerr();
@@ -208,7 +208,7 @@ sigset_t sig::pending () const
 
 bool sig::ispending (int signo) const
 {
-#ifndef WIN32
+#ifndef _WIN32
   sigset_t s = pending ();
   switch (sigismember (&s, signo)) {
   case 0: return false;

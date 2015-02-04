@@ -51,7 +51,7 @@ iopipestream* iopipestream::head = 0;
 static sockbuf* createpipestream (const char* cmd, int mode)
 {
   int sockets[2];
-#ifndef WIN32
+#ifndef _WIN32
   //FIXME!!! this code needs to work
   if (::socketpair (af_unix, sockbuf::sock_stream, 0, sockets) == -1)
     throw sockerr (errno);
@@ -122,14 +122,14 @@ iopipestream::iopipestream (const char* cmd)
 iopipestream::iopipestream(sockbuf::type ty, int proto)
   : ios (0), iosockstream(NULL), cpid (-1), next (head)  // probably NULL is not a good idea //LN
 {
-#ifndef WIN32
+#ifndef _WIN32
   if (::socketpair(af_unix, ty, proto, sp) == -1)
     throw sockerr (errno);
   head = this;	
 #endif
 }
 
-#ifndef WIN32
+#ifndef _WIN32
 pid_t iopipestream::fork ()
 {
   pid_t pid = ::fork (); // donot use vfork here

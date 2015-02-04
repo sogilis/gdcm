@@ -56,7 +56,7 @@ public:
   ~iopipestream () { delete std::ios::rdbuf (); }
 
   pid_t        pid () const { return cpid; } // returns cpid
-#ifndef WIN32
+#ifndef _WIN32
   static pid_t fork(); // sets cpid of all iopipestream* in the head
 #endif
 };

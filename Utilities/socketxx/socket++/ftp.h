@@ -12,7 +12,7 @@
 #define FTP_H
 
 #include <socket++/protocol.h>
-#ifndef WIN32
+#ifndef _WIN32
 #	include <sys/param.h>
 #else
 #define	MAXPATHLEN MAX_PATH

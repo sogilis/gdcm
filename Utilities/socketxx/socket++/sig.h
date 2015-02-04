@@ -12,7 +12,7 @@
 #include <list>
 #include <map>
 #include <algorithm>
-#ifndef WIN32
+#ifndef _WIN32
 #include <sys/signal.h>
 
 #else

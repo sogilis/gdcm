@@ -14,7 +14,7 @@
 #include <fstream>
 #include <socket++/fork.h>
 #include <fcntl.h>
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h>
 #include <stdlib.h>
 #else
@@ -37,7 +37,7 @@ using namespace std;
 #    include <netdb.h>
    }
 #else
-#ifndef WIN32
+#ifndef _WIN32
 #  include <netdb.h>
 #endif
 #endif
